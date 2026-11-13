@@ -1,0 +1,25 @@
+Set-Location 'C:\Users\devad\Downloads\DevOps Labortary\Experiment-04-Jenkins' # Open the experiment folder
+
+docker pull jenkins/jenkins:lts # Download Jenkins
+
+docker run -d --name jenkins -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts # Start Jenkins with persistent storage
+
+docker logs -f jenkins # Wait for Jenkins to finish starting, then press Ctrl+C
+
+docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword # Display the unlock password
+
+Start-Process 'http://localhost:8080' # Unlock Jenkins, install suggested plugins and create an administrator
+
+Read-Host 'Press Enter after completing Jenkins setup' # Wait for Jenkins setup
+
+Start-Process 'http://localhost:8080/pluginManager/available' # Install HTML Publisher and restart Jenkins if requested
+
+Read-Host 'Press Enter after HTML Publisher is installed' # Wait for the publishing plugin
+
+Get-Content -Raw .\Jenkinsfile | Set-Clipboard # Copy the pipeline script
+
+Start-Process 'http://localhost:8080/view/all/newJob' # Create karunya-site-pipeline as a Pipeline job, paste the script, enable Groovy Sandbox and save
+
+Read-Host 'Press Enter after saving the pipeline job' # Wait for job creation
+
+Start-Process 'http://localhost:8080/job/karunya-site-pipeline/' # Click Build Now, verify SUCCESS in Console Output and open the Karunya Site report
