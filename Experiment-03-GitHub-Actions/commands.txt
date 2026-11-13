@@ -12,12 +12,6 @@ docker build -t python-ci-lab . # Build the application image
 
 docker run --rm python-ci-lab # Run and remove the application container
 
-$GitHubUser = Read-Host 'GitHub username' # Set the repository owner
-
-$GitEmail = Read-Host 'Git commit email' # Set the commit email
-
-$DockerHubUser = Read-Host 'Docker Hub username' # Set the image owner
-
 Start-Process 'https://github.com/new' # Create an empty repository named python-ci-docker-lab without a README
 
 Read-Host 'Press Enter after creating the empty repository' # Wait for repository creation
@@ -48,10 +42,8 @@ Start-Process "https://github.com/$GitHubUser/python-ci-docker-lab/actions" # Ve
 
 Read-Host 'Press Enter after the workflow succeeds' # Wait for the published image
 
-Start-Process "https://hub.docker.com/r/$DockerHubUser/python-ci-lab/tags" # Verify the latest image tag
+docker login -u "dva15" # Authenticate to retrieve the published image
 
-docker login -u "$DockerHubUser" # Authenticate to retrieve the published image
+docker pull "dva15/python-ci-lab:latest" # Pull the CI-built image
 
-docker pull "${DockerHubUser}/python-ci-lab:latest" # Pull the CI-built image
-
-docker run --rm "${DockerHubUser}/python-ci-lab:latest" # Verify the CI-built application
+docker run --rm "dva15/python-ci-lab:latest" # Verify the CI-built application
