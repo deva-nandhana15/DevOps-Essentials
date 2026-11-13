@@ -16,8 +16,6 @@ git commit -m "Initial commit of the project" # Commit the project
 
 git branch -M main # Name the main branch
 
-Start-Process 'https://github.com/new' # Create an empty repository named git-essentials-lab without a README
-
 Read-Host 'Press Enter after creating the empty repository' # Wait for repository creation
 
 git remote add origin https://github.com/deva-nandhana15/Git-Essentials-Lab.git
@@ -32,10 +30,7 @@ git commit -am "Add feature work" # Commit the feature
 
 git push -u origin feature/new-feature # Publish the feature before merging
 
-
-Start-Process "https://github.com/$GitHubUser/git-essentials-lab/compare/main...feature/new-feature?expand=1" # Create the pull request and merge it on GitHub
-
-Read-Host 'Press Enter after merging the pull request on GitHub' # Wait for the remote merge
+merge the branches in git (pull request).
 
 git checkout main # Switch to main
 

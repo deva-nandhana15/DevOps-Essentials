@@ -1,5 +1,3 @@
-Set-Location 'C:\Users\devad\Downloads\DevOps Labortary\Experiment-02-Flask-Docker' # Open the experiment folder
-
 docker --version # Check Docker
 
 docker info # Check the Docker Desktop Linux engine
@@ -16,10 +14,6 @@ docker ps # Show the running container
 
 docker logs flask-docker-app # Check application startup
 
-curl.exe --retry 10 --retry-connrefused --retry-delay 2 http://localhost:5000 # Verify the Flask page
-
-Start-Process 'http://localhost:5000' # Open the Flask page
-
 # Sign in using a Docker Hub access token
 docker login -u dva15
 
@@ -27,8 +21,6 @@ docker login -u dva15
 docker tag flask-docker-app "dva15/flask-docker-app:latest" # Tag the image for Docker Hub
 
 docker push "dva15/flask-docker-app:latest"   # Publish the image
-
-Start-Process "https://hub.docker.com/r/dva15/flask-docker-app" # Verify the latest tag and make the repository public for Experiment 7
 
 docker rm -f flask-docker-app # Remove the local test container
 
